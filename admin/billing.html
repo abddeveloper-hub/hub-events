@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Owner Portal | Billing & Ordering</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <style>
+        .admin-container {
+            max-width: 900px;
+            margin: 100px auto;
+            background: #fff;
+            padding: 50px;
+            border: 1px solid var(--border-soft);
+            box-shadow: 0 40px 100px rgba(184, 149, 72, 0.1);
+        }
+        .bill-form-group {
+            margin-bottom: 25px;
+        }
+        .bill-form-group label {
+            display: block;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--gold-rich);
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+        .bill-input {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid var(--border-soft);
+            background: #fafafa;
+            outline: none;
+            font-family: 'Inter', sans-serif;
+        }
+        .item-row {
+            display: grid;
+            grid-template-columns: 3fr 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+        .btn-add-item {
+            background: none;
+            border: 1px dashed var(--gold-rich);
+            color: var(--gold-rich);
+            padding: 10px;
+            width: 100%;
+            cursor: pointer;
+            margin-top: 10px;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+        }
+        .btn-send-bill {
+            background: var(--gold-rich);
+            color: white;
+            padding: 20px;
+            width: 100%;
+            border: none;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 40px;
+            transition: var(--transition-royal);
+        }
+        .btn-send-bill:hover {
+            background: var(--text-dark);
+        }
+        .bill-preview {
+            margin-top: 40px;
+            padding: 30px;
+            background: #fdfcf8;
+            border: 1px solid var(--border-soft);
+            display: none;
+        }
+    </style>
+</head>
+<body class="page-fade">
+    <div class="admin-container">
+        <h2 class="serif" style="font-size: 2.5rem; color: var(--text-dark); margin-bottom: 40px; text-align: center;">Royal Billing Portal</h2>
+
+        <div class="bill-form-group">
+            <label>Customer WhatsApp (with country code)</label>
+            <input type="text" id="custPhone" class="bill-input" placeholder="e.g. 919876543210">
+        </div>
+
+        <div class="bill-form-group">
+            <label>Customer Name</label>
+            <input type="text" id="custName" class="bill-input" placeholder="e.g. Client Asif">
+        </div>
+
+        <div class="bill-form-group">
+            <label>Event Date & Venue</label>
+            <input type="text" id="eventInfo" class="bill-input" placeholder="e.g. April 5th 2027, Al Thamam">
+        </div>
+
+        <div style="margin-top: 40px;">
+            <label style="font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; color: var(--gold-rich); font-weight: 700;">Order Items</label>
+            <div id="itemsContainer">
+                <div class="item-row">
+                    <input type="text" class="bill-input item-desc" placeholder="Service Name (e.g. Beef Biryani)">
+                    <input type="number" class="bill-input item-qty" placeholder="Qty">
+                    <input type="number" class="bill-input item-price" placeholder="Rate">
+                </div>
+            </div>
+            <button class="btn-add-item" onclick="addItemRow()">+ Add Line Item</button>
+        </div>
+
+        <div class="bill-form-group" style="margin-top: 30px;">
+            <label>Notes / Special Instructions</label>
+            <textarea id="billNotes" class="bill-input" rows="3" placeholder="e.g. Advance paid: 5000"></textarea>
+        </div>
+
+        <button class="btn-send-bill" onclick="generateAndSendBill()">Generate & Send to WhatsApp</button>
+    </div>
+
+    <script>
+        function addItemRow() {
+            const container = document.getElementById('itemsContainer');
+            const row = document.createElement('div');
+            row.className = 'item-row';
+            row.innerHTML = `
+                <input type="text" class="bill-input item-desc" placeholder="Service Name">
+                <input type="number" class="bill-input item-qty" placeholder="Qty">
+                <input type="number" class="bill-input item-price" placeholder="Rate">
+            `;
+            container.appendChild(row);
+        }
+
+        function generateAndSendBill() {
+            const phone = document.getElementById('custPhone').value;
+            const name = document.getElementById('custName').value;
+            const event = document.getElementById('eventInfo').value;
+            const notes = document.getElementById('billNotes').value;
+
+            if(!phone) { alert('Please enter customer phone'); return; }
+
+            let itemsText = "";
+            let total = 0;
+            const descs = document.querySelectorAll('.item-desc');
+            const qtys = document.querySelectorAll('.item-qty');
+            const prices = document.querySelectorAll('.item-price');
+
+            descs.forEach((d, i) => {
+                const desc = d.value;
+                const qty = qtys[i].value || 0;
+                const price = prices[i].value || 0;
+                const lineTotal = qty * price;
+                if(desc) {
+                    itemsText += `• ${desc}: ${qty} x ${price} = ₹${lineTotal}\n`;
+                    total += lineTotal;
+                }
+            });
+
+            const billMsg = `*EVENTS HUB VELIYANCODE*\n` +
+                          `_Royal Billing & Confirmation_\n\n` +
+                          `*CLIENT:* ${name}\n` +
+                          `*EVENT:* ${event}\n` +
+                          `--------------------------\n` +
+                          `*ORDER DETAILS:*\n${itemsText}` +
+                          `--------------------------\n` +
+                          `*TOTAL AMOUNT: ₹${total}*\n` +
+                          `--------------------------\n` +
+                          `*NOTES:* ${notes}\n\n` +
+                          `_Thank you for choosing luxury._\n` +
+                          `Contact: +91 8089774414`;
+
+            const url = `https://wa.me/${phone}?text=${encodeURIComponent(billMsg)}`;
+            window.open(url, '_blank');
+        }
+    </script>
+</body>
+</html>

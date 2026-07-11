@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visuals | Events Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <style>
+        .editorial-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            padding: 50px 0;
+        }
+        .editorial-item {
+            position: relative;
+            overflow: hidden;
+            aspect-ratio: 16/9;
+            background: #eee;
+            border-radius: 20px;
+        }
+        .editorial-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: sepia(0.2) contrast(1.1);
+            transition: transform 1.8s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+        .editorial-item:hover img {
+            transform: scale(1.1);
+        }
+        .item-label {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            color: white;
+            z-index: 10;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
+        }
+        .editorial-item:hover .item-label {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="page-fade">
+    <div class="scroll-progress" id="progressBar"></div>
+    <div id="loader"><div class="loader-text">Gallery</div></div>
+
+    <nav>
+        <a href="../index.html" class="logo reveal-left">Events Hub</a>
+        <div class="nav-links reveal-right">
+            <a href="../catering/index.html">Catering</a>
+            <a href="../decor/index.html">Decor</a>
+            <a href="index.html" style="color: var(--gold-rich);">Gallery</a>
+            <a href="../order.html">Order Now</a>
+            <a href="../contact/index.html">Reserve</a>
+        </div>
+    </nav>
+
+    <section>
+        <span class="section-label reveal-left">Portfolio</span>
+        <h2 class="section-title reveal-right">The Visual Archive.</h2>
+
+        <div class="editorial-grid">
+            <div class="editorial-item reveal-left">
+                <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=800&q=80" alt="Stage">
+                <div class="item-label">Al Thamam Grand Stage</div>
+            </div>
+            <div class="editorial-item reveal-right">
+                <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=800&q=80" alt="Decor">
+                <div class="item-label">Architectural Decor</div>
+            </div>
+            <div class="editorial-item reveal-left">
+                <img src="https://images.unsplash.com/photo-1536599018102-9f803c140fc1?auto=format&fit=crop&w=800&q=80" alt="Juice">
+                <div class="item-label">Live Juice Station</div>
+            </div>
+            <div class="editorial-item reveal-right">
+                <img src="https://images.unsplash.com/photo-1589302168068-964664d93dc9?auto=format&fit=crop&w=800&q=80" alt="Biryani">
+                <div class="item-label">The Signature Banquet</div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="reveal-center">
+        <p style="letter-spacing: 5px; text-transform: uppercase; font-size: 0.7rem; color: var(--gold-rich);">Visual Archives by Events Hub</p>
+    </footer>
+
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>

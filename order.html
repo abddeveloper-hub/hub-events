@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grand Order | Events Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        .order-container {
+            max-width: 1000px;
+            margin: 120px auto 50px;
+            padding: 0 20px;
+        }
+        .order-section {
+            background: #fff;
+            border: 1px solid var(--border-soft);
+            padding: 40px;
+            margin-bottom: 30px;
+            border-radius: 20px;
+        }
+        .item-choice {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #f9f9f9;
+        }
+        .item-choice:last-child { border-bottom: none; }
+
+        .checkbox-custom {
+            width: 25px;
+            height: 25px;
+            accent-color: var(--gold-rich);
+            cursor: pointer;
+        }
+
+        .price-tag {
+            color: var(--gold-rich);
+            font-weight: 700;
+            margin-right: 15px;
+            font-size: 0.9rem;
+        }
+
+        .bill-summary {
+            position: sticky;
+            bottom: 20px;
+            background: #1a1a1a;
+            color: white;
+            padding: 30px;
+            border-radius: 25px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            border: 1px solid var(--gold-rich);
+        }
+
+        .btn-confirm {
+            background: var(--gold-rich);
+            color: white;
+            border: none;
+            padding: 20px 40px;
+            border-radius: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: var(--transition-royal);
+        }
+
+        .btn-confirm:hover {
+            background: #fff;
+            color: #000;
+            transform: translateY(-5px);
+        }
+
+        .pax-input {
+            width: 100px;
+            padding: 12px;
+            border: 1px solid var(--border-soft);
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        #visualBill {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            max-width: 500px;
+            background: #fff;
+            padding: 40px;
+            border: 2px solid var(--gold-rich);
+            z-index: 2000;
+            box-shadow: 0 0 100px rgba(0,0,0,0.5);
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top:0; left:0; width:100%; height:100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 1500;
+        }
+
+        @media (max-width: 768px) {
+            .order-section { padding: 25px; }
+            .item-choice span { font-size: 0.85rem; }
+            .btn-confirm { padding: 15px 25px; font-size: 0.8rem; }
+            #displayTotal { font-size: 1.8rem !important; }
+        }
+    </style>
+</head>
+<body class="page-fade">
+    <div class="scroll-progress" id="progressBar"></div>
+
+    <nav>
+        <a href="index.html" class="logo">Events Hub</a>
+        <div class="nav-links">
+            <a href="catering/index.html">Catering</a>
+            <a href="decor/index.html">Decor</a>
+            <a href="order.html" style="color: var(--gold-rich);">Order Now</a>
+        </div>
+    </nav>
+
+    <div class="order-container">
+        <h2 class="serif reveal-left" style="font-size: 3rem; margin-bottom: 10px;">The Royal Order</h2>
+        <p class="reveal-right" style="color: var(--text-muted); margin-bottom: 50px;">Select your signature services. Prices are inclusive of luxury hospitality.</p>
+
+        <div class="order-section reveal-left">
+            <h3 style="color: var(--gold-rich); margin-bottom: 25px; text-transform: uppercase; letter-spacing: 3px;">1. Event Logistics</h3>
+            <div style="margin-bottom: 20px;">
+                <label style="font-weight: 700;">Total Guest Count (Pax): </label>
+                <input type="number" id="paxCount" class="pax-input" value="700" onchange="updateTotal()">
+            </div>
+        </div>
+
+        <!-- Comprehensive Catering -->
+        <div class="order-section reveal-right">
+            <h3 style="color: var(--gold-rich); margin-bottom: 25px; text-transform: uppercase; letter-spacing: 3px;">2. Culinary Selections (Per Pax)</h3>
+
+            <div class="item-choice">
+                <span>Main Course (Beef Biryani, Chicken Chilli, Salad, Pickle, 500ml Water, Ceramic Plates)</span>
+                <div><span class="price-tag">₹450</span><input type="checkbox" class="order-item checkbox-custom" data-name="Main Course Banquet" data-price="450" data-pax="true" onchange="updateTotal()"></div>
+            </div>
+            <div class="item-choice">
+                <span>Live Juice Station (Mango, Grape, Watermelon, Mint)</span>
+                <div><span class="price-tag">₹80</span><input type="checkbox" class="order-item checkbox-custom" data-name="Live Juices" data-price="80" data-pax="true" onchange="updateTotal()"></div>
+            </div>
+            <div class="item-choice">
+                <span>Vegetarian Menu (Rice, Fish Curry, Fish Fry, Moru Curry, Upperi, Pappadam, Pulinchi)</span>
+                <div><span class="price-tag">₹350</span><input type="checkbox" class="order-item checkbox-custom" data-name="Veg Menu (50 Pax)" data-price="350" data-pax="true" onchange="updateTotal()"></div>
+            </div>
+            <div class="item-choice">
+                <span>Desert Station (Ice Cream & Kawa)</span>
+                <div><span class="price-tag">₹60</span><input type="checkbox" class="order-item checkbox-custom" data-name="Deserts" data-price="60" data-pax="true" onchange="updateTotal()"></div>
+            </div>
+            <div class="item-choice">
+                <span>Designer Wedding Cake (3kg)</span>
+                <div><span class="price-tag">₹6,000</span><input type="checkbox" class="order-item checkbox-custom" data-name="3kg Cake" data-price="6000" data-pax="false" onchange="updateTotal()"></div>
+            </div>
+        </div>
+
+        <!-- Comprehensive Arrangements -->
+        <div class="order-section reveal-left">
+            <h3 style="color: var(--gold-rich); margin-bottom: 25px; text-transform: uppercase; letter-spacing: 3px;">3. Masterpiece Arrangements (Fixed)</h3>
+
+            <div class="item-choice">
+                <span>Stage Decoration (Grand Architecture)</span>
+                <div><span class="price-tag">₹45,000</span><input type="checkbox" class="order-item checkbox-custom" data-name="Stage Decor" data-price="45000" onchange="updateTotal()"></div>
+            </div>
+            <div class="item-choice">
+                <span>Entrance Gate & Name Board</span>
+                <div><span class="price-tag">₹12,000</span><input type="checkbox" class="order-item checkbox-custom" data-name="Entrance & Board" data-price="12000" onchange="updateTotal()"></div>
+            </div>
+            <div class="item-choice">
+                <span>Mirror Decor & Pathway Flower Stands</span>
+                <div><span class="price-tag">₹15,000</span><input type="checkbox" class="order-item checkbox-custom" data-name="Path & Mirror" data-price="15000" onchange="updateTotal()"></div>
+            </div>
+            <div class="item-choice">
+                <span>Mala Bulb House Lighting</span>
+                <div><span class="price-tag">₹18,000</span><input type="checkbox" class="order-item checkbox-custom" data-name="Mala Lighting" data-price="18000" onchange="updateTotal()"></div>
+            </div>
+            <div class="item-choice">
+                <span>Photo Booth & Pathway Display</span>
+                <div><span class="price-tag">₹8,000</span><input type="checkbox" class="order-item checkbox-custom" data-name="Photo Booth" data-price="8000" onchange="updateTotal()"></div>
+            </div>
+            <div class="item-choice">
+                <span>Bridal Entry & Hand Bouquet</span>
+                <div><span class="price-tag">₹7,000</span><input type="checkbox" class="order-item checkbox-custom" data-name="Bridal Entry" data-price="7000" onchange="updateTotal()"></div>
+            </div>
+            <div class="item-choice">
+                <span>Car Bouquet Selection</span>
+                <div><span class="price-tag">₹2,500</span><input type="checkbox" class="order-item checkbox-custom" data-name="Car Bouquet" data-price="2500" onchange="updateTotal()"></div>
+            </div>
+            <div class="item-choice">
+                <span>Cinematic Visuals (Cold Fire, Popper, Smoke, Bubble)</span>
+                <div><span class="price-tag">₹12,000</span><input type="checkbox" class="order-item checkbox-custom" data-name="Grand Effects" data-price="12000" onchange="updateTotal()"></div>
+            </div>
+            <div class="item-choice">
+                <span>Premium Table Clothing & Service Team</span>
+                <div><span class="price-tag">₹15,000</span><input type="checkbox" class="order-item checkbox-custom" data-name="Service Team" data-price="15000" onchange="updateTotal()"></div>
+            </div>
+            <div class="item-choice">
+                <span>Professional Sound System</span>
+                <div><span class="price-tag">₹8,000</span><input type="checkbox" class="order-item checkbox-custom" data-name="Sound System" data-price="8000" onchange="updateTotal()"></div>
+            </div>
+            <div class="item-choice">
+                <span>Water Counter & Desert Counter Setup</span>
+                <div><span class="price-tag">₹5,000</span><input type="checkbox" class="order-item checkbox-custom" data-name="Counter Setups" data-price="5000" onchange="updateTotal()"></div>
+            </div>
+        </div>
+
+        <!-- Summary Bar -->
+        <div class="bill-summary">
+            <div>
+                <p style="font-size: 0.8rem; opacity: 0.7; text-transform: uppercase; letter-spacing: 1px;">Estimated Total Bill</p>
+                <h3 id="displayTotal" style="font-size: 2.5rem; color: var(--gold-light);">₹0</h3>
+            </div>
+            <button class="btn-confirm" onclick="generateVisualBill()">Generate & Order</button>
+        </div>
+    </div>
+
+    <!-- Visual Bill Overlay -->
+    <div class="overlay" id="overlay"></div>
+    <div id="visualBill">
+        <h2 class="serif" style="text-align: center; color: var(--gold-rich); border-bottom: 2px solid var(--gold-rich); padding-bottom: 15px; margin-bottom: 20px;">EVENTS HUB</h2>
+        <p style="text-align: center; text-transform: uppercase; font-size: 0.7rem; letter-spacing: 2px; margin-bottom: 20px;">Official Order Summary</p>
+        <div id="billContent" style="font-size: 0.9rem; line-height: 1.8; color: #333;"></div>
+        <div style="margin-top: 30px; border-top: 1px dashed #ccc; padding-top: 20px;">
+            <h3 id="billTotal" style="text-align: right; color: var(--gold-rich); font-size: 1.5rem;"></h3>
+        </div>
+        <button class="btn-confirm" style="width: 100%; margin-top: 30px;" onclick="sendFinalWhatsApp()">Confirm & Send to WhatsApp</button>
+        <p style="text-align: center; margin-top: 15px; font-size: 0.7rem; color: #999; cursor: pointer;" onclick="closeBill()">← Back to Selections</p>
+    </div>
+
+    <script src="assets/js/main.js"></script>
+    <script>
+        let currentOrderMsg = "";
+
+        function updateTotal() {
+            let total = 0;
+            const pax = document.getElementById('paxCount').value || 0;
+            const items = document.querySelectorAll('.order-item');
+
+            items.forEach(item => {
+                if(item.checked) {
+                    const price = parseInt(item.getAttribute('data-price'));
+                    const isPax = item.getAttribute('data-pax') === 'true';
+                    total += isPax ? (price * pax) : price;
+                }
+            });
+
+            document.getElementById('displayTotal').innerText = "₹" + total.toLocaleString();
+        }
+
+        function generateVisualBill() {
+            const pax = document.getElementById('paxCount').value;
+            let total = 0;
+            let htmlContent = `<p><strong>PAX COUNT:</strong> ${pax}</p><hr style="border:none; border-bottom:1px solid #eee; margin:10px 0;">`;
+            let whatsappMsg = `*NEW ROYAL ORDER*\n_Events Hub Veliyancode_\n\n*PAX:* ${pax}\n--------------------------\n`;
+
+            const items = document.querySelectorAll('.order-item');
+            let hasItems = false;
+
+            items.forEach(item => {
+                if(item.checked) {
+                    hasItems = true;
+                    const name = item.getAttribute('data-name');
+                    const price = parseInt(item.getAttribute('data-price'));
+                    const isPax = item.getAttribute('data-pax') === 'true';
+                    const lineTotal = isPax ? (price * pax) : price;
+
+                    htmlContent += `<div style="display:flex; justify-content:space-between;"><span>${name}</span><span>₹${lineTotal.toLocaleString()}</span></div>`;
+                    whatsappMsg += `• ${name}: ₹${lineTotal.toLocaleString()}\n`;
+                    total += lineTotal;
+                }
+            });
+
+            if(!hasItems) { alert('Please select at least one service'); return; }
+
+            whatsappMsg += `--------------------------\n*TOTAL ESTIMATED: ₹${total.toLocaleString()}*\n--------------------------\n_Customer has viewed this bill._`;
+            currentOrderMsg = whatsappMsg;
+
+            document.getElementById('billContent').innerHTML = htmlContent;
+            document.getElementById('billTotal').innerText = "TOTAL: ₹" + total.toLocaleString();
+
+            document.getElementById('overlay').style.display = 'block';
+            document.getElementById('visualBill').style.display = 'block';
+        }
+
+        function closeBill() {
+            document.getElementById('overlay').style.display = 'none';
+            document.getElementById('visualBill').style.display = 'none';
+        }
+
+        function sendFinalWhatsApp() {
+            const phone = "918089774414";
+            window.open(`https://wa.me/${phone}?text=${encodeURIComponent(currentOrderMsg)}`, '_blank');
+        }
+    </script>
+</body>
+</html>

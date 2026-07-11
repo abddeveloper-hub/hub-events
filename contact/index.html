@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reserve | Events Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <style>
+        .input-royal {
+            width: 100%;
+            padding: 20px 0;
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid var(--border-soft);
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+            outline: none;
+            transition: var(--transition-royal);
+        }
+        .input-royal:focus {
+            border-bottom-color: var(--gold-rich);
+        }
+        .btn-royal {
+            background: var(--gold-rich);
+            color: white;
+            padding: 20px 60px;
+            border: none;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition-royal);
+        }
+        .btn-royal:hover {
+            background: var(--text-dark);
+            transform: translateY(-5px);
+        }
+    </style>
+</head>
+<body class="page-fade">
+    <div class="scroll-progress" id="progressBar"></div>
+    <div id="loader"><div class="loader-text">Contact</div></div>
+
+    <nav>
+        <a href="../index.html" class="logo reveal-left">Events Hub</a>
+        <div class="nav-links reveal-right">
+            <a href="../catering/index.html">Catering</a>
+            <a href="../decor/index.html">Decor</a>
+            <a href="../gallery/index.html">Gallery</a>
+            <a href="../order.html">Order Now</a>
+            <a href="index.html" style="color: var(--gold-rich);">Reserve</a>
+        </div>
+    </nav>
+
+    <section>
+        <span class="section-label reveal-left">Contact</span>
+        <h2 class="section-title reveal-right">Begin Your Reserve.</h2>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 100px;">
+            <div class="reveal-left">
+                <p style="font-size: 1.5rem; margin-bottom: 40px; font-family: 'Playfair Display', serif;">Let us curate your April 5th celebration at Al Thamam.</p>
+                <div style="margin-bottom: 50px;">
+                    <input type="text" id="custName" placeholder="Full Name" class="input-royal">
+                    <input type="text" id="eventDate" placeholder="Date of Event (e.g., April 5th 2027)" class="input-royal">
+                    <textarea id="eventMsg" placeholder="Your vision for the day..." class="input-royal" rows="4"></textarea>
+                    <button onclick="handleInquiry()" class="btn-royal">Send WhatsApp Inquiry</button>
+                </div>
+            </div>
+
+            <div class="card-royal reveal-right" style="align-self: flex-start;">
+                <h3 style="font-size: 1.2rem; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 3px;">The Hub</h3>
+                <p style="color: var(--text-muted); margin-bottom: 30px;">Veliyancode, Kerala</p>
+                <p style="font-size: 2rem; color: var(--gold-rich); margin-bottom: 10px;">+91 8089 774 414</p>
+                <p style="color: var(--text-muted);">10:00 AM — 03:00 PM</p>
+            </div>
+        </div>
+    </section>
+
+    <script src="../assets/js/main.js"></script>
+    <script>
+        function handleInquiry() {
+            const name = document.getElementById('custName').value;
+            const date = document.getElementById('eventDate').value;
+            const msg = document.getElementById('eventMsg').value;
+
+            const fullMsg = `Hello Events Hub!\n\nName: ${name}\nDate: ${date}\nVision: ${msg}`;
+            sendWhatsApp(fullMsg);
+        }
+    </script>
+</body>
+</html>

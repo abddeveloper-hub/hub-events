@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Decor | Events Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <style>
+        .parallax-decor {
+            height: 400px;
+            background-attachment: fixed;
+            background-size: cover;
+            background-position: center;
+            border-radius: 40px;
+            margin: 50px 0;
+            border: 1px solid var(--border-soft);
+        }
+    </style>
+</head>
+<body class="page-fade">
+    <div class="scroll-progress" id="progressBar"></div>
+    <div id="loader"><div class="loader-text">Design</div></div>
+
+    <nav>
+        <a href="../index.html" class="logo reveal-left">Events Hub</a>
+        <div class="nav-links reveal-right">
+            <a href="../catering/index.html">Catering</a>
+            <a href="index.html" style="color: var(--gold-rich);">Decor</a>
+            <a href="../gallery/index.html">Gallery</a>
+            <a href="../order.html">Order Now</a>
+            <a href="../contact/index.html">Reserve</a>
+        </div>
+    </nav>
+
+    <section>
+        <span class="section-label reveal-left">Atmosphere</span>
+        <h2 class="section-title reveal-right">Grand Orchestration.</h2>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px;">
+            <div class="card-royal reveal-left">
+                <h3 style="font-size: 1.8rem; margin-bottom: 30px;">Architecture & Design</h3>
+                <ul class="royal-list">
+                    <li>Stage Decoration <span>Grand</span></li>
+                    <li>Entrance Gate <span>Signature</span></li>
+                    <li>Name Board <span>Custom</span></li>
+                    <li>Mirror Decor <span>Luxury</span></li>
+                    <li>Pathway Flower Stand <span>Floral</span></li>
+                    <li>Mala Bulb House <span>Illumination</span></li>
+                </ul>
+            </div>
+            <div class="card-royal reveal-right">
+                <h3 style="font-size: 1.8rem; margin-bottom: 30px;">Cinematic Effects</h3>
+                <ul class="royal-list">
+                    <li>Cold Fire <span>1 Set</span></li>
+                    <li>Popper <span>1 Set</span></li>
+                    <li>Smoke Effect <span>Ambient</span></li>
+                    <li>Bubble Effect <span>Dreamy</span></li>
+                    <li>Sound System <span>Acoustic</span></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="parallax-decor reveal-center" style="background-image: url('https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=1200&q=80');"></div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 30px; margin-top: 40px;">
+            <div class="card-royal reveal-left" style="padding: 40px;">
+                <h3 style="font-size: 1.3rem; margin-bottom: 20px;">The Bridal Entry</h3>
+                <p style="color: var(--text-muted); font-size: 0.9rem;">Bridal Entry, Hand Bouquet, and specialized Car Bouquet services.</p>
+            </div>
+            <div class="card-royal reveal-center" style="padding: 40px;">
+                <h3 style="font-size: 1.3rem; margin-bottom: 20px;">The Experience</h3>
+                <p style="color: var(--text-muted); font-size: 0.9rem;">Designer Photo Booths, Table Clothing, and Service excellence.</p>
+            </div>
+            <div class="card-royal reveal-right" style="padding: 40px;">
+                <h3 style="font-size: 1.3rem; margin-bottom: 20px;">Stations</h3>
+                <p style="color: var(--text-muted); font-size: 0.9rem;">Managed Water Counters and dedicated Desert Counters.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="reveal-center">
+        <p style="letter-spacing: 5px; text-transform: uppercase; font-size: 0.7rem; color: var(--gold-rich);">Grand Orchestration by Events Hub</p>
+    </footer>
+
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>

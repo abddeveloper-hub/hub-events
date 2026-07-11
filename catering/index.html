@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Culinary | Events Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <style>
+        .food-zoom {
+            overflow: hidden;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            height: 300px;
+        }
+        .food-zoom img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 3s ease;
+        }
+        .card-royal:hover .food-zoom img {
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body class="page-fade">
+    <div class="scroll-progress" id="progressBar"></div>
+    <div id="loader"><div class="loader-text">Catering</div></div>
+
+    <nav>
+        <a href="../index.html" class="logo reveal-left">Events Hub</a>
+        <div class="nav-links reveal-right">
+            <a href="index.html" style="color: var(--gold-rich);">Catering</a>
+            <a href="../decor/index.html">Decor</a>
+            <a href="../gallery/index.html">Gallery</a>
+            <a href="../order.html">Order Now</a>
+            <a href="../contact/index.html">Reserve</a>
+        </div>
+    </nav>
+
+    <section>
+        <span class="section-label reveal-left">Gastronomy</span>
+        <h2 class="section-title reveal-right">The Culinary Experience.</h2>
+
+        <div style="display: grid; grid-template-columns: 2fr 1.2fr; gap: 50px;">
+            <div class="card-royal reveal-left">
+                <div class="food-zoom">
+                    <img src="https://images.unsplash.com/photo-1589302168068-964664d93dc9?auto=format&fit=crop&w=800&q=80" alt="Biryani">
+                </div>
+                <h3 style="font-size: 2rem; margin-bottom: 40px; border-bottom: 1px solid var(--border-soft); padding-bottom: 20px;">Main Banquet (700 Pax)</h3>
+                <ul class="royal-list">
+                    <li>Beef Biryani <span>Signature</span></li>
+                    <li>Chicken Chilli <span>Premium</span></li>
+                    <li>Salad (Fruits & Veg) <span>Fresh</span></li>
+                    <li>Pickle (Dates & Chilly) <span>Specialty</span></li>
+                    <li>Bottle Water 500ml <span>Inclusive</span></li>
+                    <li>Ceramic Plates <span>Standard</span></li>
+                </ul>
+            </div>
+
+            <div class="card-royal reveal-right">
+                <div class="food-zoom">
+                    <img src="https://images.unsplash.com/photo-1536599018102-9f803c140fc1?auto=format&fit=crop&w=600&q=80" alt="Juice">
+                </div>
+                <h3 style="font-size: 1.5rem; margin-bottom: 30px;">Live Stations</h3>
+                <ul class="royal-list">
+                    <li>Fresh Mango <span>Live</span></li>
+                    <li>Premium Grape <span>Live</span></li>
+                    <li>Watermelon <span>Live</span></li>
+                    <li>Mint Refresher <span>Live</span></li>
+                </ul>
+            </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 50px; margin-top: 50px;">
+            <div class="card-royal reveal-left">
+                <h3 style="font-size: 1.5rem; margin-bottom: 30px;">Vegetarian Cuisine (50 Pax)</h3>
+                <ul class="royal-list">
+                    <li>Traditional Rice</li>
+                    <li>Authentic Fish Curry</li>
+                    <li>Crispy Fish Fry</li>
+                    <li>Moru Curry</li>
+                    <li>Upperi</li>
+                    <li>Pappadam</li>
+                    <li>Pulinchi</li>
+                </ul>
+            </div>
+            <div class="card-royal reveal-right">
+                <h3 style="font-size: 1.5rem; margin-bottom: 30px;">The Patisserie</h3>
+                <ul class="royal-list">
+                    <li>Designer Wedding Cake <span>3kg</span></li>
+                    <li>Premium Ice Cream</li>
+                    <li>Authentic Kawa</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <footer class="reveal-center">
+        <p style="letter-spacing: 5px; text-transform: uppercase; font-size: 0.7rem; color: var(--gold-rich);">Catering Excellence by Events Hub</p>
+    </footer>
+
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>
