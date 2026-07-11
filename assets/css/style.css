@@ -493,3 +493,38 @@ section {
     opacity: 1;
     transform: scale(1);
 }
+
+/* Mobile Typography Enhancement */
+@media (max-width: 768px) {
+    /* Enlarge Headings */
+    h1, .hero h1 { font-size: 3.5rem !important; }
+    h2, .section-title { font-size: 2.8rem !important; }
+    h3 { font-size: 2.2rem !important; }
+
+    /* Enlarge Body & List Text */
+    p, .hero p, .card-royal p, .moodboard-content p {
+        font-size: 1.2rem !important;
+        line-height: 1.6 !important;
+    }
+
+    .royal-list li, .item-choice span {
+        font-size: 1.1rem !important;
+        padding: 20px 0 !important;
+    }
+
+    /* Enlarge UI Elements */
+    .btn-royal, .btn-luxury, .btn-confirm {
+        font-size: 1.1rem !important;
+        padding: 25px !important;
+    }
+
+    .counter-number { font-size: 4rem !important; }
+    .counter-label { font-size: 1rem !important; }
+
+    .timeline-time { font-size: 2rem !important; }
+
+    .logo { font-size: 1.4rem !important; }
+
+    /* Ensure Ticker is readable */
+    .ticker-content span { font-size: 1.8rem !important; }
+}
