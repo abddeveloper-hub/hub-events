@@ -494,37 +494,110 @@ section {
     transform: scale(1);
 }
 
-/* Mobile Typography Enhancement */
+/* Mobile Clarity & Structural Optimization */
 @media (max-width: 768px) {
-    /* Enlarge Headings */
-    h1, .hero h1 { font-size: 3.5rem !important; }
-    h2, .section-title { font-size: 2.8rem !important; }
-    h3 { font-size: 2.2rem !important; }
+    cursor, .cursor, .cursor-dot { display: none !important; }
+    * { cursor: auto !important; }
 
-    /* Enlarge Body & List Text */
-    p, .hero p, .card-royal p, .moodboard-content p {
-        font-size: 1.2rem !important;
-        line-height: 1.6 !important;
+    nav {
+        padding: 15px 5%;
+        background: rgba(253, 252, 248, 0.98);
+        border-bottom: 1px solid var(--border-soft);
+        height: auto;
     }
 
-    .royal-list li, .item-choice span {
+    .nav-links { display: none; }
+    .logo { font-size: 1.2rem !important; letter-spacing: 2px; }
+
+    .hero {
+        height: auto;
+        min-height: 100vh;
+        padding: 150px 5% 80px;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    /* CLEAR TYPOGRAPHY */
+    h1, .hero h1 { font-size: 3.2rem !important; line-height: 1.1 !important; margin-bottom: 30px !important; }
+    h2, .section-title { font-size: 2.5rem !important; line-height: 1.2 !important; margin-bottom: 40px !important; text-align: center !important; }
+    h3 { font-size: 1.8rem !important; margin-bottom: 20px !important; }
+    p, .hero p, .card-royal p, .moodboard-content p { font-size: 1.2rem !important; line-height: 1.6 !important; }
+
+    section { padding: 80px 5% !important; }
+
+    /* GRID RECOVERY - Clear 1-column visibility */
+    .grid-luxury,
+    .editorial-grid,
+    .catering-grid,
+    .moodboard-grid,
+    .services-grid,
+    div[style*="display: grid"] {
+        grid-template-columns: 1fr !important;
+        grid-template-areas: none !important;
+        gap: 30px !important;
+    }
+
+    .item-span-2, .item-row-2, .large, .wide {
+        grid-column: span 1 !important;
+        grid-row: span 1 !important;
+    }
+
+    .card-royal { padding: 35px !important; margin-bottom: 20px; }
+
+    .hero .hero-footer {
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center !important;
+        gap: 40px !important;
+        margin-top: 50px;
+    }
+    .hero .hero-footer div { text-align: center !important; }
+
+    .royal-list li, .item-choice {
         font-size: 1.1rem !important;
         padding: 20px 0 !important;
+        flex-direction: row !important; /* Keep price/check horizontal */
+        justify-content: space-between !important;
+        align-items: center !important;
     }
 
-    /* Enlarge UI Elements */
     .btn-royal, .btn-luxury, .btn-confirm {
+        width: 100% !important;
+        padding: 22px !important;
         font-size: 1.1rem !important;
-        padding: 25px !important;
+        display: block !important;
+        text-align: center;
     }
 
-    .counter-number { font-size: 4rem !important; }
-    .counter-label { font-size: 1rem !important; }
+    .counter-box { padding: 30px 0 !important; border-bottom: 1px solid var(--border-soft); }
+    .counter-number { font-size: 3.5rem !important; }
 
-    .timeline-time { font-size: 2rem !important; }
+    .timeline-item { margin-left: 15px !important; padding: 30px 20px !important; }
 
-    .logo { font-size: 1.4rem !important; }
+    /* Animation Adjustment - Vertical only for clarity */
+    .reveal-left, .reveal-right {
+        opacity: 1 !important;
+        transform: translateY(20px) !important;
+        transition: all 1s ease-out !important;
+    }
+    .reveal-left.active, .reveal-right.active {
+        transform: translateY(0) !important;
+    }
 
-    /* Ensure Ticker is readable */
-    .ticker-content span { font-size: 1.8rem !important; }
+    .ticker-content span { font-size: 1.4rem !important; padding: 0 30px; }
+
+    /* Fixed Bill Summary Visibility */
+    .bill-summary {
+        position: fixed !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        border-radius: 0 !important;
+        padding: 20px !important;
+        flex-direction: column !important;
+        gap: 15px !important;
+        background: #000 !important;
+    }
 }

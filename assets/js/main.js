@@ -1,29 +1,62 @@
 document.addEventListener('DOMContentLoaded', () => {
+    const supportsHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
     // 1. Smooth Royal Cursor
-    const cursor = document.createElement('div');
-    const dot = document.createElement('div');
-    cursor.className = 'cursor';
-    dot.className = 'cursor-dot';
-    document.body.appendChild(cursor);
-    document.body.appendChild(dot);
+    if (supportsHover) {
+        const cursor = document.createElement('div');
+        const dot = document.createElement('div');
+        cursor.className = 'cursor';
+        dot.className = 'cursor-dot';
+        document.body.appendChild(cursor);
+        document.body.appendChild(dot);
 
-    document.addEventListener('mousemove', (e) => {
-        cursor.style.transform = `translate3d(${e.clientX - 12}px, ${e.clientY - 12}px, 0)`;
-        dot.style.left = `${e.clientX - 2}px`;
-        dot.style.top = `${e.clientY - 2}px`;
-    });
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.transform = `translate3d(${e.clientX - 12}px, ${e.clientY - 12}px, 0)`;
+            dot.style.left = `${e.clientX - 2}px`;
+            dot.style.top = `${e.clientY - 2}px`;
+        });
 
-    // Cursor Interactions
-    document.querySelectorAll('a, button, .moodboard-item, .card-royal').forEach(el => {
-        el.addEventListener('mouseenter', () => {
-            cursor.style.transform += ' scale(2)';
-            cursor.style.background = 'rgba(184, 149, 72, 0.1)';
+        document.querySelectorAll('a, button, .moodboard-item, .card-royal').forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursor.style.transform += ' scale(2)';
+                cursor.style.background = 'rgba(184, 149, 72, 0.1)';
+            });
+            el.addEventListener('mouseleave', () => {
+                cursor.style.transform = cursor.style.transform.replace(' scale(2)', '');
+                cursor.style.background = 'transparent';
+            });
         });
-        el.addEventListener('mouseleave', () => {
-            cursor.style.transform = cursor.style.transform.replace(' scale(2)', '');
-            cursor.style.background = 'transparent';
+    }
+
+    const nav = document.querySelector('nav');
+    const navLinks = document.querySelector('.nav-links');
+
+    if (nav && navLinks && !document.querySelector('.menu-toggle')) {
+        const toggle = document.createElement('button');
+        toggle.className = 'menu-toggle';
+        toggle.setAttribute('aria-label', 'Toggle navigation');
+        toggle.innerHTML = '<span></span><span></span><span></span>';
+        nav.appendChild(toggle);
+
+        toggle.addEventListener('click', () => {
+            navLinks.classList.toggle('open');
+            toggle.classList.toggle('active');
         });
-    });
+
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('open');
+                toggle.classList.remove('active');
+            });
+        });
+
+        document.addEventListener('click', (event) => {
+            if (window.innerWidth <= 768 && !nav.contains(event.target)) {
+                navLinks.classList.remove('open');
+                toggle.classList.remove('active');
+            }
+        });
+    }
 
     // 2. WhatsApp Logic
     window.sendWhatsApp = (message) => {

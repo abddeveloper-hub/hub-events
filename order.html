@@ -112,10 +112,32 @@
         }
 
         @media (max-width: 768px) {
-            .order-section { padding: 25px; }
-            .item-choice span { font-size: 0.85rem; }
-            .btn-confirm { padding: 15px 25px; font-size: 0.8rem; }
+            .order-container { margin: 100px auto 30px; padding: 0 15px; }
+            .order-section { padding: 22px; }
+            .item-choice {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            .item-choice > div {
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+            .item-choice span { font-size: 0.9rem; line-height: 1.5; }
+            .btn-confirm { padding: 15px 20px; font-size: 0.8rem; }
+            .bill-summary {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+                padding: 20px;
+                position: static;
+                margin-top: 20px;
+            }
+            .pax-input { width: 100%; }
             #displayTotal { font-size: 1.8rem !important; }
+            #visualBill { width: 95%; padding: 25px; }
         }
     </style>
 </head>
